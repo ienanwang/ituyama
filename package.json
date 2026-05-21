@@ -1,10 +1,12 @@
 {
-  "name": "my-custom-proxy",
+  "name": "custom-unblocker",
   "version": "1.0.0",
+  "description": "Advanced web proxy for school environment",
+  "main": "server.js",
   "scripts": {
-    "start": "node index.js"
+    "start": "node server.js"
   },
   "dependencies": {
-    "http-proxy": "^1.18.1"
+    "@tomphttp/bare-server-node": "^2.0.1",
+    "express": "^4.18.2"
   }
-}
