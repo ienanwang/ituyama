@@ -1,0 +1,9 @@
+{
+  "name": "custom-vercel-proxy",
+  "version": "1.0.0",
+  "description": "Vercel optimized proxy",
+  "main": "index.js",
+  "dependencies": {
+    "http-proxy": "^1.18.1"
+  }
+}
