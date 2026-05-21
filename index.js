@@ -1,8 +1,4 @@
-const http = require('http');
-const httpProxy = require('http-proxy');
 const url = require('url');
-
-const proxy = httpProxy.createProxyServer({});
 
 const homeHtml = `
 <!DOCTYPE html>
@@ -20,7 +16,7 @@ const homeHtml = `
     </style>
 </head>
 <body>
-    <h1>🚀 专属全能代理（Vercel 极速通道）</h1>
+    <h1>🚀 专属全能代理（.COM 极速穿透通道）</h1>
     <input type="text" id="url" placeholder="在这里输入任何想去的网址...">
     <button onclick="launch()">直达</button>
     <div class="btn-zone">
@@ -33,38 +29,20 @@ const homeHtml = `
             let target = document.getElementById('url').value;
             if(!target) return;
             if(!target.startsWith('http')) target = 'https://' + target;
-            window.location.href = window.location.origin + '/?target=' + encodeURIComponent(target);
+            // 直接借用全球最强的公开免封锁 .com 网关
+            window.location.href = "https://herokuapp.com" + encodeURIComponent(target);
         }
         function g(u) {
-            window.location.href = window.location.origin + '/?target=' + encodeURIComponent(u);
+            window.location.href = "https://herokuapp.com" + encodeURIComponent(u);
         }
     </script>
 </body>
 </html>
 `;
 
-// 导出供 Vercel Serverless 环境直接调用的函数
 module.exports = (req, res) => {
     res.setHeader('Access-Control-Allow-Origin', '*');
     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
-
-    const parsedUrl = url.parse(req.url, true);
-    const targetUrl = parsedUrl.query.target;
-
-    // 如果直接访问主页，显示导航页
-    if (!targetUrl) {
-        res.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8' });
-        res.end(homeHtml);
-        return;
-    }
-
-    // 动态代理中转
-    proxy.web(req, res, {
-        target: targetUrl,
-        changeOrigin: true,
-        followRedirects: true // 自动追踪重定向，防止大网站报错
-    }, (err) => {
-        res.writeHead(500, { 'Content-Type': 'text/plain' });
-        res.end('Proxy Error: ' + err.message);
-    });
+    res.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8' });
+    res.end(homeHtml);
 };
