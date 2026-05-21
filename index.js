@@ -36,7 +36,6 @@ app.get('/', (req, res) => {
                 let target = document.getElementById('url').value;
                 if(!target) return;
                 if(!target.startsWith('http')) target = 'https://' + target;
-                // 采用高级的匿名代理内核重定向
                 window.location.href = "https://herokuapp.com" + encodeURIComponent(target);
             }
             function g(u) {
@@ -57,7 +56,7 @@ server.on('request', (req, res) => {
     }
 });
 
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 10000;
 server.listen(PORT, () => {
-    print('高级多路代理运行在端口: ' + PORT);
+    console.log('高级多路代理运行在端口: ' + PORT);
 });
