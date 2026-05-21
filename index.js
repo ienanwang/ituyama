@@ -56,7 +56,6 @@ server.on('request', (req, res) => {
     }
 });
 
-const PORT = process.env.PORT || 10000;
-server.listen(PORT, () => {
-    console.log('高级多路代理运行在端口: ' + PORT);
-});
+// 替换掉之前的 server.listen(...) 这一段
+module.exports = server;
+
